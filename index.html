@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+</head>
+<style>
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        background-color: #000022;
+        font-family: 'Dancing Script', cursive;
+    }
+
+    .card {
+        height: 500px;
+        width: 600px;
+        position: absolute;
+        margin: auto;
+        right: 10%;
+        top: 0;
+        bottom: 0;
+        cursor: pointer;
+        transition: 2s;
+        -webkit-perspective: 1200px;
+        perspective: 1200px;
+    }
+
+    .card:hover {
+        transform: rotate(-5deg);
+    }
+
+    .card:hover .outside {
+        transform: rotateY(-130deg);
+    }
+
+    .outside {
+        height: 100%;
+        width: 50%;
+        position: absolute;
+        left: 50.1%;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        transition: 2s;
+        transform-origin: left;
+    }
+
+    .front,
+    .back {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        /*hide backface in firefox*/
+        transform: rotateX(0deg);
+    }
+
+    .front {
+        background-color: #BE0F04;
+        z-index: 1;
+    }
+
+    .front:before {
+        content: "";
+        position: absolute;
+        background-color: #101010;
+        height: 80px;
+        width: 100%;
+        top: 240px;
+    }
+
+    .belt {
+        height: 120px;
+        width: 120px;
+        border: 20px solid #E5A037;
+        border-radius: 10px;
+        position: absolute;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 220px;
+        z-index: 1;
+    }
+
+    .belt:after {
+        content: "";
+        position: absolute;
+        width: 95px;
+        height: 18px;
+        background-color: #d6932e;
+        top: 31px;
+        right: 13px;
+        border-radius: 8px;
+    }
+
+    .mouth {
+        position: absolute;
+        background-color: #EFBEAB;
+        height: 50px;
+        width: 80px;
+        z-index: 1;
+        border-radius: 0 0 50% 50%;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 20px;
+    }
+
+    .beard {
+        background-color: #f5f5f5;
+        position: absolute;
+        width: 100%;
+        height: 180px;
+        border-radius: 0 0 50% 50%;
+    }
+
+    .beard:before,
+    .beard:after {
+        position: absolute;
+        content: "";
+        width: 130px;
+        height: 50px;
+        background-color: #f5f5f5;
+        box-shadow: 0 10px #d3d3d3;
+        border-radius: 0 0 50% 50%;
+        top: -0px;
+        z-index: 2;
+    }
+
+    .beard:before {
+        left: 13px;
+    }
+
+    .beard:after {
+        right: 13px;
+    }
+
+    .back {
+        background: linear-gradient(to right,
+                #BE0F04 50%,
+                #7d0b03);
+        transform: rotateY(180deg);
+    }
+
+    .inside {
+        height: 100%;
+        width: 50%;
+        position: absolute;
+        left: 50%;
+        background: linear-gradient(to left,
+                #BE0F04 50%,
+                #7d0b03);
+        font-family: 'Dancing Script', cursive;
+        color: white;
+        font-size: 70px;
+        text-align: center;
+        line-height: 100px;
+        padding: 90px 10px;
+        box-shadow: 25px 25px 35px rgba(0, 0, 0, 0.3);
+    }
+
+    .inside>p {
+        border-bottom: 10px dotted white;
+    }
+
+    a {
+        color: #ffffff;
+        font-family: 'Dancing Script', cursive;
+        font-weight: 500;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        border: 3px solid #ffffff;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    a>.fa {
+        color: #FF0000;
+    }
+
+    @media screen and (min-width: 451px) {
+        a {
+            font-size: 18px;
+            padding: 8px 12px 8px 12px;
+        }
+    }
+
+    @media screen and (max-width: 450px) {
+        a {
+            font-size: 12px;
+            padding: 5px 8px 5px 8px;
+        }
+    }
+
+    .css-typing {
+        position: absolute;
+        left: 10%;
+        top: 20%;
+        text-align: center;
+    }
+
+    .css-typing p {
+        /* border-right: .15em solid orange; */
+        /* font-family: "Courier"; */
+        font-size: 40px;
+        white-space: nowrap;
+        overflow: hidden;
+        color: #ffffff;
+        font-family: 'Dancing Script', cursive;
+    }
+
+    .css-typing p:nth-child(1) {
+        width: 25em;
+        -webkit-animation: type3 2s steps(40, end);
+        animation: type3 2s steps(40, end);
+        -webkit-animation-delay: 4s;
+        animation-delay: 4s;
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+    }
+
+    .css-typing p:nth-child(2) {
+        width: 25em;
+        opacity: 0;
+        -webkit-animation: type3 5s steps(40, end);
+        animation: type3 5s steps(40, end);
+        -webkit-animation-delay: 6s;
+        animation-delay: 6s;
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+    }
+
+    .css-typing p:nth-child(3) {
+        width: 25em;
+        opacity: 0;
+        -webkit-animation: type3 5s steps(20, end), blink .5s step-end infinite alternate;
+        animation: type3 5s steps(20, end), blink .5s step-end infinite alternate;
+        -webkit-animation-delay: 10s;
+        animation-delay: 10s;
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+    }
+    .css-typing p:nth-child(4) {
+        width: 25em;
+        opacity: 0;
+        -webkit-animation: type3 5s steps(40, end), blink .5s step-end infinite alternate;
+        animation: type3 5s steps(40, end), blink .5s step-end infinite alternate;
+        -webkit-animation-delay: 18s;
+        animation-delay: 18s;
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+    }
+   
+
+    @keyframes type3 {
+        0% {
+            width: 0;
+        }
+
+        1% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @-webkit-keyframes type3 {
+        0% {
+            width: 0;
+        }
+
+        1% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes blink {
+        50% {
+            border-color: transparent;
+        }
+    }
+
+    @-webkit-keyframes blink {
+        50% {
+            border-color: tranparent;
+        }
+    }
+    #main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+</style>
+
+<body>
+<div id="main">
+    <div style="width: 70%;">
+        <div class="css-typing">
+            <p>Merry Christmas </p>
+            <p>
+                Wishing all my family members peace and love this holiday season. 
+            </p>
+            <p>
+                wishing you a warm and wonderful Christmas. 
+            </p>
+            <p>
+                I wish you happiness for the rest of the year.
+            </p>
+           
+            
+            
+        </div>
+    </div>
+    <div style="width: 30%;">
+        <div class="card">
+            <div class="inside">
+                <p>Merry Christmas</p>
+            </div>
+            <div class="outside">
+                <div class="front">
+                    <div class="belt"></div>
+                    <div class="mouth"></div>
+                    <div class="beard"></div>
+                </div>
+                <div class="back"></div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+    
+    <audio  autoplay >
+        <source src="https://assets.codepen.io/3/jingle-bells.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+</body>
+
+</html>
